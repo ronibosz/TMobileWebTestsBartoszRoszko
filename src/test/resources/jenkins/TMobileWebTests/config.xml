@@ -1,0 +1,74 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <displayName>Tmobile</displayName>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>projectRootDir</name>
+          <description>Project root directory</description>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <customWorkspace>${projectRootDir}</customWorkspace>
+  <builders>
+    <hudson.tasks.Maven>
+      <targets>clean test</targets>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+      <injectBuildVariables>false</injectBuildVariables>
+    </hudson.tasks.Maven>
+  </builders>
+  <publishers>
+    <net.masterthought.jenkins.CucumberReportPublisher plugin="cucumber-reports@5.8.5">
+      <fileIncludePattern>**/*.json</fileIncludePattern>
+      <fileExcludePattern></fileExcludePattern>
+      <jsonReportDirectory>target/reports</jsonReportDirectory>
+      <reportTitle></reportTitle>
+      <failedStepsNumber>-1</failedStepsNumber>
+      <skippedStepsNumber>-1</skippedStepsNumber>
+      <pendingStepsNumber>-1</pendingStepsNumber>
+      <undefinedStepsNumber>-1</undefinedStepsNumber>
+      <failedScenariosNumber>-1</failedScenariosNumber>
+      <failedFeaturesNumber>-1</failedFeaturesNumber>
+      <failedStepsPercentage>0.0</failedStepsPercentage>
+      <skippedStepsPercentage>0.0</skippedStepsPercentage>
+      <pendingStepsPercentage>0.0</pendingStepsPercentage>
+      <undefinedStepsPercentage>0.0</undefinedStepsPercentage>
+      <failedScenariosPercentage>0.0</failedScenariosPercentage>
+      <failedFeaturesPercentage>0.0</failedFeaturesPercentage>
+      <buildStatus>UNCHANGED</buildStatus>
+      <stopBuildOnFailedReport>false</stopBuildOnFailedReport>
+      <failedAsNotFailingStatus>false</failedAsNotFailingStatus>
+      <skippedAsNotFailingStatus>false</skippedAsNotFailingStatus>
+      <pendingAsNotFailingStatus>false</pendingAsNotFailingStatus>
+      <undefinedAsNotFailingStatus>false</undefinedAsNotFailingStatus>
+      <trendsLimit>0</trendsLimit>
+      <sortingMethod>NATURAL</sortingMethod>
+      <customJsFiles></customJsFiles>
+      <customCssFiles></customCssFiles>
+      <mergeFeaturesById>false</mergeFeaturesById>
+      <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
+      <hideEmptyHooks>false</hideEmptyHooks>
+      <skipEmptyJSONFiles>false</skipEmptyJSONFiles>
+      <expandAllSteps>true</expandAllSteps>
+      <classificationsFilePattern></classificationsFilePattern>
+    </net.masterthought.jenkins.CucumberReportPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.28"/>
+  </buildWrappers>
+</project>
